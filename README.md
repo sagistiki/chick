@@ -65,8 +65,8 @@ A matching cow-moo synthesiser (`generate_moo_sounds.py`) is included for a futu
 
 ## Credits
 
-- Sprite references for the seven chick styles generated via AI image tools (Midjourney / DALL·E / similar) and post-processed in this repo (`process_all_chicks.py` → 256×64 spritesheets with transparent backgrounds).
-- Everything else — Swift code, sound synthesis, SVGs, build tooling — written by hand for this project.
+- Sprite references for the seven chick styles generated with **Nano Banana 2** (Google's image generation model) and post-processed in this repo (`process_all_chicks.py` → 256×64 spritesheets with transparent backgrounds).
+- Swift code, sound synthesis pipeline, SVGs, and build tooling written with **Claude Opus 4.7 Max**.
 
 ## License
 
