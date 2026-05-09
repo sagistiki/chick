@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  Empty spritesheet template for the chick.
+  Source dimensions: 128 × 32 px = 4 horizontal frames of 32 × 32.
+  Drawn here at ×8 zoom (1024 × 256) so each source pixel is a clearly visible
+  8×8 block, with a light grid every 1 source pixel and bold borders around
+  every frame cell. Pure white background — drop your final frames straight
+  into the cells, then export the assembled spritesheet at the native 128×32
+  with a transparent background.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 400" width="1100" height="400">
+  <defs>
+    <!-- 1-source-pixel grid (every 8 disp px at the ×8 zoom level) -->
+    <pattern id="pxgrid" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+      <path d="M 8 0 L 0 0 L 0 8" fill="none" stroke="#E5E5E5" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+
+  <rect width="1100" height="400" fill="#FFFFFF"/>
+
+  <!-- ========== TITLE ========== -->
+  <text x="550" y="38" font-family="-apple-system, system-ui, sans-serif"
+        font-size="22" font-weight="700" text-anchor="middle" fill="#1F1F1F">
+    Chick Spritesheet Template
+  </text>
+  <text x="550" y="62" font-family="-apple-system, system-ui, sans-serif"
+        font-size="13" text-anchor="middle" fill="#666">
+    Source 128 × 32 px · 4 horizontal frames · 32 × 32 per frame · place frames inside the cells
+  </text>
+
+  <!-- ========== SPRITE CANVAS (×8 zoom → 1024 × 256) ========== -->
+  <g transform="translate(38, 100)">
+    <!-- White cells with light pixel grid -->
+    <rect width="1024" height="256" fill="#FFFFFF"/>
+    <rect width="1024" height="256" fill="url(#pxgrid)"/>
+
+    <!-- Bold cell borders (every 256 disp = 32 src) -->
+    <g stroke="#1F1F1F" stroke-width="2" fill="none">
+      <rect x="0"   y="0" width="256" height="256"/>
+      <rect x="256" y="0" width="256" height="256"/>
+      <rect x="512" y="0" width="256" height="256"/>
+      <rect x="768" y="0" width="256" height="256"/>
+    </g>
+
+    <!-- Subtle centre crosshair in each cell (helps centre-align frames) -->
+    <g stroke="#D8D8D8" stroke-width="1" stroke-dasharray="3,3">
+      <line x1="128" y1="0"   x2="128" y2="256"/>
+      <line x1="384" y1="0"   x2="384" y2="256"/>
+      <line x1="640" y1="0"   x2="640" y2="256"/>
+      <line x1="896" y1="0"   x2="896" y2="256"/>
+      <line x1="0"   y1="128" x2="1024" y2="128"/>
+    </g>
+
+    <!-- Source-pixel coordinate ticks -->
+    <g font-family="monospace" font-size="11" fill="#999">
+      <text x="0"    y="-8">0</text>
+      <text x="256"  y="-8" text-anchor="middle">32</text>
+      <text x="512"  y="-8" text-anchor="middle">64</text>
+      <text x="768"  y="-8" text-anchor="middle">96</text>
+      <text x="1024" y="-8" text-anchor="end">128</text>
+      <text x="-8"   y="6"   text-anchor="end">0</text>
+      <text x="-8"   y="262" text-anchor="end">32</text>
+    </g>
+
+    <!-- Frame numbers, drawn faintly in the corner of each cell -->
+    <g font-family="-apple-system, system-ui, sans-serif" font-size="13" font-weight="600" fill="#BBBBBB">
+      <text x="8"   y="20">F0</text>
+      <text x="264" y="20">F1</text>
+      <text x="520" y="20">F2</text>
+      <text x="776" y="20">F3</text>
+    </g>
+  </g>
+
+  <!-- ========== FOOTER NOTE ========== -->
+  <text x="550" y="386" font-family="-apple-system, system-ui, sans-serif"
+        font-size="12" text-anchor="middle" fill="#888">
+    All frames must face the same direction (right). Final export: 128 × 32 px PNG with transparent background.
+  </text>
+</svg>

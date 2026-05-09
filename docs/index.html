@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A tiny, animated baby-chick critter that lives on your Mac desktop. Eight visual styles, eight cute sounds, and a chicken coop on a draggable island. macOS only.">
+<title>Chick — A tiny critter for your Mac desktop</title>
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<header class="hero">
+  <div class="ground-strip" aria-hidden="true">
+    <div class="chick anime walking"   style="--start: 8%;  --duration: 22s; --delay: 0s;"></div>
+    <div class="chick lego walking"    style="--start: 32%; --duration: 26s; --delay: -6s;"></div>
+    <div class="chick memoji walking"  style="--start: 60%; --duration: 20s; --delay: -3s;"></div>
+    <div class="chick oil walking"     style="--start: 84%; --duration: 28s; --delay: -10s;"></div>
+  </div>
+
+  <div class="hero-content">
+    <img src="icon.png" alt="Chick app icon" class="app-icon">
+    <h1>Chick</h1>
+    <p class="tagline">A tiny critter that lives on your Mac desktop.</p>
+    <p class="sub-tagline">Seven visual styles · Synthesised chirps · Multi-monitor · Light on resources.</p>
+
+    <div class="cta-row">
+      <a href="#download" class="btn btn-primary">
+        <span class="apple-logo">&#xF8FF;</span>
+        Download for macOS
+      </a>
+      <a href="https://github.com/sagistiki/chick" class="btn btn-ghost">View on GitHub</a>
+    </div>
+    <p class="cta-note">Free · macOS 13+ · ~3 MB · CPU 0% when idle</p>
+  </div>
+</header>
+
+<!-- ════════════════════ STYLES SHOWCASE ════════════════════ -->
+<section class="section styles-section">
+  <h2>Pick your chick</h2>
+  <p class="section-sub">Each style has its own spritesheet — switch live from the menu bar.</p>
+
+  <div class="styles-grid">
+    <div class="style-card">
+      <div class="chick-stage"><div class="chick anime walk-loop"></div></div>
+      <h3>Anime</h3>
+      <p>Cel-shaded kawaii. Default style.</p>
+    </div>
+    <div class="style-card">
+      <div class="chick-stage"><div class="chick realistic walk-loop"></div></div>
+      <h3>Realistic</h3>
+      <p>Photo-real baby chick.</p>
+    </div>
+    <div class="style-card">
+      <div class="chick-stage"><div class="chick memoji walk-loop"></div></div>
+      <h3>Memoji</h3>
+      <p>3D plastic-sticker emoji vibe.</p>
+    </div>
+    <div class="style-card">
+      <div class="chick-stage"><div class="chick lego walk-loop"></div></div>
+      <h3>Lego</h3>
+      <p>Built from blocky bricks.</p>
+    </div>
+    <div class="style-card">
+      <div class="chick-stage"><div class="chick embroidered walk-loop"></div></div>
+      <h3>Embroidered Felt</h3>
+      <p>Stitched fabric patch.</p>
+    </div>
+    <div class="style-card">
+      <div class="chick-stage"><div class="chick oil walk-loop"></div></div>
+      <h3>Oil Painting</h3>
+      <p>Brushstroke portrait.</p>
+    </div>
+    <div class="style-card">
+      <div class="chick-stage"><div class="chick psx walk-loop pixelated"></div></div>
+      <h3>PSX Low-Poly</h3>
+      <p>Late-90s 3D nostalgia.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ FEATURES ════════════════════ -->
+<section class="section features-section">
+  <h2>What it does</h2>
+  <div class="features-grid">
+    <div class="feature">
+      <div class="feature-icon">🐤</div>
+      <h3>Wanders your screen</h3>
+      <p>The chick idles, walks, and bounces around all your displays — including across multi-monitor setups.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🏠</div>
+      <h3>Chicken coop island</h3>
+      <p>Drop a draggable coop onto any space. Click it to spawn coloured chick friends. They wander home periodically.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🎵</div>
+      <h3>Synthesised voices</h3>
+      <p>22 chirp variants generated live from real-world bioacoustic data — not pre-recorded samples. Each click sounds slightly different.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🌈</div>
+      <h3>Eight colour variations</h3>
+      <p>Click the coop to summon chicks in pink, mint, lavender, blue, red, white, brown, and the original yellow.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🪶</div>
+      <h3>Click to chirp</h3>
+      <p>Click on a critter to make it peep. Move the cursor near it and watch it dart away in a panic.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">⚡</div>
+      <h3>Practically free</h3>
+      <p>Idle chicks consume no CPU. Active animation is around 1–3 % on a single core. Stays out of your way.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ DOWNLOAD ════════════════════ -->
+<section id="download" class="section download-section">
+  <h2>Download</h2>
+
+  <div class="download-card">
+    <img src="icon.png" alt="" class="download-icon">
+    <div class="download-info">
+      <div class="download-title">Chick.app</div>
+      <div class="download-meta">macOS 13 (Ventura) and newer · Universal · Free</div>
+    </div>
+    <a href="https://github.com/sagistiki/chick/releases/latest/download/Chick.zip"
+       class="btn btn-primary btn-large">
+       Download <span class="zip-label">.zip</span>
+    </a>
+  </div>
+
+  <details class="install-instructions">
+    <summary>First-time install — read this if macOS blocks the app</summary>
+    <ol>
+      <li>Unzip <code>Chick.zip</code> and drag <strong>Chick.app</strong> into <code>~/Applications</code>.</li>
+      <li>The app is unsigned, so on first launch macOS will refuse it. <strong>Right-click → Open</strong>, then click <em>Open</em> again in the dialog.</li>
+      <li>The chick appears in the centre of your screen. A 🐤 icon shows up in the menu bar with all controls (spawn, despawn, change style, show coop, quit).</li>
+    </ol>
+  </details>
+
+  <p class="alt-install">
+    Or build from source:
+    <code>git clone &amp;&amp; ./build.sh &amp;&amp; open Chick.app</code>
+  </p>
+</section>
+
+<!-- ════════════════════ FOOTER ════════════════════ -->
+<footer class="site-footer">
+  <p>Built with Swift &amp; AppKit · Sounds synthesised from bioacoustic research · Sprite styles generated with AI image tools and processed in Pillow</p>
+  <p class="footer-credits">
+    <a href="https://github.com/sagistiki/chick">Source</a> ·
+    <a href="https://github.com/sagistiki/chick/issues">Report a bug</a>
+  </p>
+</footer>
+
+</body>
+</html>

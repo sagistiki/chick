@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  Chick Island — pixel-art floating island, drawn in the Sprout Lands palette.
+  Source dimensions: 80 × 56 px. Designed to be scaled by integer factors
+  (e.g. ×3 for the in-app widget) with nearest-neighbour interpolation.
+  Grass surface line is at y=6 (top), so the chicken house sits with its
+  bottom at y=6 in source pixels (= 18 px when scaled ×3).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 56" width="80" height="56">
+  <!-- ground shadow -->
+  <ellipse cx="40" cy="55" rx="28" ry="1.2" fill="#000000" opacity="0.18"/>
+
+  <!-- ============== DIRT BODY (back layer) ============== -->
+  <!-- tapered hexagon: gives the floating-island silhouette -->
+  <path d="M 6 18 L 74 18 L 70 42 L 62 50 L 18 50 L 10 42 Z"
+        fill="#A26F4A" stroke="#5C3A1E" stroke-width="1.2" stroke-linejoin="round"/>
+
+  <!-- darker dirt patches (rocks / shadow) -->
+  <rect x="14" y="22" width="2" height="3" fill="#8B5A3C"/>
+  <rect x="62" y="26" width="3" height="2" fill="#8B5A3C"/>
+  <rect x="42" y="34" width="2" height="3" fill="#8B5A3C"/>
+  <rect x="28" y="42" width="2" height="2" fill="#8B5A3C"/>
+  <rect x="50" y="40" width="3" height="2" fill="#8B5A3C"/>
+  <rect x="20" y="44" width="2" height="2" fill="#8B5A3C"/>
+
+  <!-- lighter dirt highlights -->
+  <rect x="22" y="28" width="2" height="2" fill="#C68C5E"/>
+  <rect x="56" y="36" width="2" height="2" fill="#C68C5E"/>
+  <rect x="36" y="22" width="2" height="2" fill="#C68C5E"/>
+  <rect x="48" y="30" width="1" height="2" fill="#C68C5E"/>
+
+  <!-- small grass roots dangling at the grass-dirt seam -->
+  <rect x="18" y="18" width="1" height="2" fill="#5F803E"/>
+  <rect x="34" y="18" width="1" height="2" fill="#5F803E"/>
+  <rect x="48" y="18" width="1" height="2" fill="#5F803E"/>
+  <rect x="60" y="18" width="1" height="2" fill="#5F803E"/>
+
+  <!-- tiny pebble at bottom point -->
+  <rect x="38" y="48" width="3" height="2" fill="#8B5A3C"/>
+  <rect x="42" y="48" width="2" height="2" fill="#8B5A3C"/>
+
+  <!-- ============== GRASS CAP (front layer) ============== -->
+  <!-- rounded grass top: rounded-rect from x=6..74, y=6..18 -->
+  <path d="M 6 18 L 6 12 Q 6 6 12 6 L 68 6 Q 74 6 74 12 L 74 18 Z"
+        fill="#A0B852" stroke="#5F803E" stroke-width="1.2" stroke-linejoin="round"/>
+
+  <!-- darker green band at the grass-dirt boundary -->
+  <rect x="7" y="16" width="66" height="2" fill="#5F803E"/>
+
+  <!-- subtle highlight specks across grass (light green) -->
+  <rect x="14" y="10" width="3" height="1" fill="#B9CD66"/>
+  <rect x="40" y="12" width="3" height="1" fill="#B9CD66"/>
+  <rect x="58" y="10" width="3" height="1" fill="#B9CD66"/>
+  <rect x="26" y="13" width="2" height="1" fill="#B9CD66"/>
+
+  <!-- left grass tuft (visible to left of the house) -->
+  <rect x="11" y="4" width="1" height="2" fill="#5F803E"/>
+  <rect x="12" y="3" width="1" height="3" fill="#5F803E"/>
+  <rect x="13" y="4" width="1" height="2" fill="#5F803E"/>
+
+  <!-- right grass tuft (visible to right of the house) -->
+  <rect x="66" y="4" width="1" height="2" fill="#5F803E"/>
+  <rect x="67" y="3" width="1" height="3" fill="#5F803E"/>
+  <rect x="68" y="4" width="1" height="2" fill="#5F803E"/>
+
+  <!-- tiny flowers on the visible grass edges -->
+  <rect x="9"  y="13" width="1" height="1" fill="#FFEB6B"/>
+  <rect x="71" y="13" width="1" height="1" fill="#FF9CB6"/>
+  <rect x="10" y="11" width="1" height="1" fill="#FFFFFF"/>
+  <rect x="70" y="11" width="1" height="1" fill="#FFEB6B"/>
+</svg>

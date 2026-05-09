@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  Minimalist white chick icon.
+  Pure white body on transparent background, thin neutral outline for
+  definition on light surfaces, with the only colour accents being the
+  black eyes and orange beak.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Body (head + body merged into a single round egg shape) -->
+  <ellipse cx="512" cy="540" rx="380" ry="370"
+           fill="#FFFFFF" stroke="#C8C8C8" stroke-width="8"/>
+
+  <!-- Left wing -->
+  <path d="M 232 612 C 180 660 180 770 224 802 C 274 818 296 738 290 642 Z"
+        fill="#F4F4F4" stroke="#C8C8C8" stroke-width="6" stroke-linejoin="round"/>
+
+  <!-- Right wing -->
+  <path d="M 792 612 C 844 660 844 770 800 802 C 750 818 728 738 734 642 Z"
+        fill="#F4F4F4" stroke="#C8C8C8" stroke-width="6" stroke-linejoin="round"/>
+
+  <!-- Eyes -->
+  <ellipse cx="395" cy="450" rx="40" ry="48" fill="#1D1D1F"/>
+  <ellipse cx="629" cy="450" rx="40" ry="48" fill="#1D1D1F"/>
+
+  <!-- Beak -->
+  <path d="M 462 530 L 562 530 L 532 600 Q 512 612 492 600 Z"
+        fill="#FFA73D" stroke="#C77B00" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- Top tuft — single feather strand to keep the chick character -->
+  <path d="M 512 180 Q 514 118 516 180"
+        stroke="#C8C8C8" stroke-width="14" stroke-linecap="round" fill="none"/>
+</svg>

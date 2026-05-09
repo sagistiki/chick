@@ -1,0 +1,418 @@
+/* ════════════════════ DESIGN TOKENS ════════════════════ */
+:root {
+  --bg:           #FFFAF0;
+  --bg-alt:       #FFF1DA;
+  --bg-card:      #FFFFFF;
+  --primary:      #FFD93D;
+  --primary-dark: #E8A300;
+  --accent:       #FF8C00;
+  --text:         #2C2826;
+  --text-soft:    #6E6056;
+  --text-faint:   #A89B90;
+  --border:       rgba(120, 90, 40, 0.10);
+  --shadow-sm:    0 2px 8px rgba(180, 130, 50, 0.08);
+  --shadow-md:    0 8px 24px rgba(180, 130, 50, 0.12);
+  --shadow-lg:    0 20px 48px rgba(180, 130, 50, 0.18);
+  --radius:       14px;
+  --radius-lg:    24px;
+  --max-w:        1100px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+               system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--text); }
+a:hover { color: var(--accent); }
+
+/* ════════════════════ HERO ════════════════════ */
+
+.hero {
+  position: relative;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, var(--bg-alt) 0%, transparent 70%),
+    var(--bg);
+  padding: 5rem 1.5rem 8rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.app-icon {
+  width: 132px;
+  height: 132px;
+  border-radius: 28px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 1.5rem;
+  background: white;
+}
+
+.hero h1 {
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
+  line-height: 1;
+}
+
+.hero .tagline {
+  font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+  color: var(--text-soft);
+  margin-bottom: 0.4rem;
+}
+
+.hero .sub-tagline {
+  color: var(--text-faint);
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+.cta-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 0.8rem;
+}
+
+.cta-note {
+  font-size: 0.85rem;
+  color: var(--text-faint);
+}
+
+/* ════════════════════ BUTTONS ════════════════════ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.18s ease-out;
+  border: 1.5px solid transparent;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--text);
+  color: var(--bg);
+  box-shadow: var(--shadow-md);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  color: var(--bg);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn-ghost:hover {
+  background: var(--bg-card);
+  border-color: var(--text-soft);
+}
+
+.btn-large {
+  padding: 1rem 1.8rem;
+  font-size: 1.05rem;
+}
+
+.apple-logo {
+  font-family: -apple-system, "Apple Color Emoji";
+  font-size: 1.1em;
+}
+
+.zip-label {
+  font-size: 0.8em;
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+/* ════════════════════ HERO GROUND STRIP (animated chicks) ════════════════════ */
+
+.ground-strip {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  height: 80px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ground-strip::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%,
+    rgba(120, 80, 30, 0.15) 30%, rgba(120, 80, 30, 0.15) 70%, transparent 100%);
+}
+
+.chick.walking {
+  position: absolute;
+  bottom: 4px;
+  left: var(--start);
+  animation:
+    walk 0.7s steps(4) infinite,
+    stroll var(--duration) ease-in-out var(--delay) infinite alternate;
+}
+
+@keyframes stroll {
+  from { transform: translateX(-30vw); }
+  to   { transform: translateX( 30vw); }
+}
+
+/* ════════════════════ CHICK SPRITES ════════════════════ */
+
+.chick {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  background-size: 256px 64px;
+  background-repeat: no-repeat;
+  image-rendering: auto;
+}
+
+.chick.pixelated { image-rendering: pixelated; image-rendering: crisp-edges; }
+
+.chick.anime       { background-image: url("sprites/chicken_anime.png"); }
+.chick.realistic   { background-image: url("sprites/chicken_realistic.png"); }
+.chick.memoji      { background-image: url("sprites/chicken_memoji.png"); }
+.chick.lego        { background-image: url("sprites/chicken_lego.png"); }
+.chick.embroidered { background-image: url("sprites/chicken_embroidered.png"); }
+.chick.oil         { background-image: url("sprites/chicken_oil.png"); }
+.chick.psx         { background-image: url("sprites/chicken_psx.png"); }
+
+.chick.walk-loop { animation: walk 0.7s steps(4) infinite; }
+
+@keyframes walk {
+  from { background-position: 0 0; }
+  to   { background-position: -256px 0; }
+}
+
+/* ════════════════════ SECTIONS ════════════════════ */
+
+.section {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 5rem 1.5rem;
+}
+
+.section h2 {
+  text-align: center;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.4rem;
+}
+
+.section-sub {
+  text-align: center;
+  color: var(--text-soft);
+  margin-bottom: 3rem;
+}
+
+/* ════════════════════ STYLES GRID ════════════════════ */
+
+.styles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+.style-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1rem 1.25rem;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.style-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.chick-stage {
+  height: 90px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.style-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.style-card p {
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+/* ════════════════════ FEATURES GRID ════════════════════ */
+
+.features-section { background: var(--bg-alt); max-width: none; }
+.features-section .section { padding-top: 0; padding-bottom: 0; }
+
+.features-section > h2,
+.features-section > .features-grid { max-width: var(--max-w); margin-left: auto; margin-right: auto; }
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 0 1.5rem;
+}
+
+.feature {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  line-height: 1;
+}
+
+.feature h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.feature p {
+  font-size: 0.92rem;
+  color: var(--text-soft);
+}
+
+/* ════════════════════ DOWNLOAD CARD ════════════════════ */
+
+.download-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.download-icon {
+  width: 80px; height: 80px;
+  border-radius: 18px;
+  flex-shrink: 0;
+}
+
+.download-info { flex: 1; min-width: 180px; }
+.download-title { font-weight: 700; font-size: 1.15rem; }
+.download-meta { font-size: 0.88rem; color: var(--text-soft); }
+
+.install-instructions {
+  margin: 2rem auto 0;
+  max-width: 720px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+}
+.install-instructions summary {
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+.install-instructions ol {
+  margin-top: 1rem;
+  padding-left: 1.4rem;
+}
+.install-instructions li { margin-bottom: 0.5rem; color: var(--text-soft); }
+.install-instructions code {
+  background: var(--bg-alt);
+  padding: 0.1em 0.4em;
+  border-radius: 5px;
+  font-size: 0.92em;
+}
+
+.alt-install {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+}
+.alt-install code {
+  background: var(--bg-alt);
+  padding: 0.25em 0.6em;
+  border-radius: 6px;
+  font-size: 0.92em;
+  display: inline-block;
+  margin-left: 0.4rem;
+}
+
+/* ════════════════════ FOOTER ════════════════════ */
+
+.site-footer {
+  text-align: center;
+  padding: 3rem 1.5rem 4rem;
+  color: var(--text-faint);
+  font-size: 0.86rem;
+  line-height: 1.8;
+}
+.site-footer a { color: var(--text-soft); text-decoration: underline; text-decoration-color: var(--border); }
+.footer-credits { margin-top: 0.4rem; }
+
+/* ════════════════════ DARK MODE ════════════════════ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:           #1A1714;
+    --bg-alt:       #221E1A;
+    --bg-card:      #2A2521;
+    --text:         #F5EFE8;
+    --text-soft:    #B8AFA5;
+    --text-faint:   #8A8077;
+    --border:       rgba(255, 220, 160, 0.08);
+    --shadow-sm:    0 2px 8px rgba(0, 0, 0, 0.30);
+    --shadow-md:    0 8px 24px rgba(0, 0, 0, 0.40);
+    --shadow-lg:    0 20px 48px rgba(0, 0, 0, 0.50);
+  }
+  .btn-primary { background: var(--primary); color: #1A1714; }
+  .btn-primary:hover { color: #1A1714; }
+}
+
+/* ════════════════════ MOBILE ════════════════════ */
+
+@media (max-width: 640px) {
+  .hero { padding: 3rem 1rem 6rem; }
+  .ground-strip { height: 70px; }
+  .chick.walking { transform: scale(0.8); }
+  .download-card { text-align: center; }
+}
