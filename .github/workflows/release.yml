@@ -44,6 +44,16 @@ jobs:
       - name: Build Chick.app
         run: bash build.sh
 
+      - name: Ad-hoc sign the bundle
+        # Without any signature macOS marks downloaded bundles as "damaged".
+        # An ad-hoc signature (`-`) at least gives Gatekeeper a code identity
+        # to verify; users still bypass Gatekeeper once via right-click→Open
+        # or `xattr -cr Chick.app`, but the app no longer reports as broken.
+        run: |
+          codesign --force --deep --options runtime --sign - Chick.app
+          codesign --verify --deep --strict --verbose=2 Chick.app
+          echo "✅ ad-hoc signed"
+
       - name: Verify bundle structure
         run: |
           test -f Chick.app/Contents/MacOS/Chick
@@ -56,6 +66,9 @@ jobs:
       - name: Zip for release
         run: |
           mkdir -p dist
+          # Strip any lingering quarantine xattr from the build runner before
+          # archiving — keeps the unzipped bundle cleaner on the user's side.
+          xattr -cr Chick.app
           /usr/bin/ditto -c -k --sequesterRsrc --keepParent Chick.app dist/Chick.zip
           ls -lh dist/
 
@@ -80,7 +93,11 @@ jobs:
 
             1. Download **`Chick.zip`** below.
             2. Unzip and drag **`Chick.app`** into `~/Applications`.
-            3. macOS will block the unsigned app on first launch — **right-click → Open**, then click *Open* in the dialog.
+            3. macOS marks unsigned apps from the internet as "damaged". Strip the quarantine flag once:
+               ```
+               xattr -cr ~/Applications/Chick.app
+               ```
+               Then double-click the app. (Alternative: right-click → Open → Open in the dialog, then any subsequent launch works.)
 
             A 🐤 icon shows up in your menu bar with all controls (spawn, despawn, change style, show coop, quit).
 

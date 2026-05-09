@@ -137,7 +137,17 @@
     <summary>First-time install — read this if macOS blocks the app</summary>
     <ol>
       <li>Unzip <code>Chick.zip</code> and drag <strong>Chick.app</strong> into <code>~/Applications</code>.</li>
-      <li>The app is unsigned, so on first launch macOS will refuse it. <strong>Right-click → Open</strong>, then click <em>Open</em> again in the dialog.</li>
+      <li>
+        macOS marks unsigned apps downloaded from the internet as “damaged”.
+        Open Terminal and run this once to strip the quarantine flag:
+        <pre><code>xattr -cr ~/Applications/Chick.app</code></pre>
+        Then double-click the app to launch it.
+      </li>
+      <li>
+        <em>Alternative without Terminal:</em> right-click <strong>Chick.app</strong> →
+        <strong>Open</strong>, then click <em>Open</em> in the dialog. Subsequent
+        launches work normally.
+      </li>
       <li>The chick appears in the centre of your screen. A 🐤 icon shows up in the menu bar with all controls (spawn, despawn, change style, show coop, quit).</li>
     </ol>
   </details>

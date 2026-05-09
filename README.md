@@ -20,7 +20,13 @@ A tiny baby-chick critter that lives on your Mac desktop.
 
 Download `Chick.zip` from [the latest release](../../releases/latest) (or [the website](https://sagistiki.github.io/chick)), unzip, drag `Chick.app` into `~/Applications`.
 
-The app is unsigned, so on first launch macOS will block it. **Right-click → Open**, then click *Open* in the dialog. Subsequent launches work normally.
+The app is unsigned (just an ad-hoc signature — no $99/yr Apple Developer ID), so macOS quarantines it on download and reports it as "damaged". Strip the quarantine flag once:
+
+```bash
+xattr -cr ~/Applications/Chick.app
+```
+
+Then double-click the app. (Alternative: right-click → Open → Open in the dialog.)
 
 A 🐤 icon appears in the menu bar with all controls.
 
