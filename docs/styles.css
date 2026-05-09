@@ -235,43 +235,52 @@ a:hover { color: var(--accent); }
 
 /* ════════════════════ STYLES GRID ════════════════════ */
 
+.styles-section { max-width: 1280px; }
+
 .styles-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.75rem;
 }
 
 .style-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem 1rem 1.25rem;
+  border-radius: var(--radius);
+  padding: 1.1rem 0.65rem 0.9rem;
   text-align: center;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 .style-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-md);
 }
 
 .chick-stage {
-  height: 90px;
+  height: 78px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
 }
 
 .style-card h3 {
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.2rem;
+  letter-spacing: -0.01em;
 }
 
 .style-card p {
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   color: var(--text-soft);
+  line-height: 1.35;
 }
+
+/* Wrap onto fewer rows on narrower viewports. */
+@media (max-width: 1024px) { .styles-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 720px)  { .styles-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 480px)  { .styles-grid { grid-template-columns: repeat(2, 1fr); } }
 
 /* ════════════════════ FEATURES GRID ════════════════════ */
 
