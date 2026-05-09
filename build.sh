@@ -26,6 +26,15 @@ for style in realistic anime memoji lego embroidered oil psx; do
   fi
 done
 
+# Per-style bunny spritesheets (same layout: 256×64 = 4 frames of 64×64).
+# Optional — bunnies are only spawnable for styles whose art is present.
+for style in anime realistic memoji lego embroidered oil psx; do
+  src="bunny_${style}.png"
+  if [ -f "$src" ]; then
+    cp "$src" "$RES_DIR/bunny_${style}.png"
+  fi
+done
+
 # ----- App icon: rasterize SVG to .icns -----
 echo "Rendering app icon from icon.svg..."
 RENDER_BIN=".build/render_icon"

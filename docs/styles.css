@@ -2,20 +2,24 @@
 :root {
   --bg:           #FFFAF0;
   --bg-alt:       #FFF1DA;
+  --bg-soft:      #FFF6E5;
   --bg-card:      #FFFFFF;
   --primary:      #FFD93D;
   --primary-dark: #E8A300;
   --accent:       #FF8C00;
+  --leaf:         #6FA85B;
+  --berry:        #E45D7A;
   --text:         #2C2826;
   --text-soft:    #6E6056;
   --text-faint:   #A89B90;
   --border:       rgba(120, 90, 40, 0.10);
+  --border-strong:rgba(120, 90, 40, 0.18);
   --shadow-sm:    0 2px 8px rgba(180, 130, 50, 0.08);
   --shadow-md:    0 8px 24px rgba(180, 130, 50, 0.12);
   --shadow-lg:    0 20px 48px rgba(180, 130, 50, 0.18);
   --radius:       14px;
   --radius-lg:    24px;
-  --max-w:        1100px;
+  --max-w:        1180px;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,6 +39,18 @@ body {
 a { color: var(--text); }
 a:hover { color: var(--accent); }
 
+kbd {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.82em;
+  padding: 0.12em 0.5em;
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  color: var(--text);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+}
+
 /* ════════════════════ HERO ════════════════════ */
 
 .hero {
@@ -42,7 +58,7 @@ a:hover { color: var(--accent); }
   background:
     radial-gradient(ellipse 80% 60% at 50% 30%, var(--bg-alt) 0%, transparent 70%),
     var(--bg);
-  padding: 5rem 1.5rem 8rem;
+  padding: 5rem 1.5rem 9rem;
   text-align: center;
   overflow: hidden;
 }
@@ -50,7 +66,7 @@ a:hover { color: var(--accent); }
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 720px;
+  max-width: 780px;
   margin: 0 auto;
 }
 
@@ -81,6 +97,9 @@ a:hover { color: var(--accent); }
   color: var(--text-faint);
   font-size: 0.95rem;
   margin-bottom: 2rem;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .cta-row {
@@ -107,7 +126,7 @@ a:hover { color: var(--accent); }
   font-weight: 600;
   font-size: 1rem;
   text-decoration: none;
-  transition: all 0.18s ease-out;
+  transition: transform 0.18s ease-out, box-shadow 0.18s ease-out, background 0.18s;
   border: 1.5px solid transparent;
   white-space: nowrap;
 }
@@ -133,29 +152,26 @@ a:hover { color: var(--accent); }
   border-color: var(--text-soft);
 }
 
-.btn-large {
-  padding: 1rem 1.8rem;
-  font-size: 1.05rem;
-}
+.btn-large { padding: 1rem 1.8rem; font-size: 1.05rem; }
 
 .apple-logo {
   font-family: -apple-system, "Apple Color Emoji";
   font-size: 1.1em;
 }
 
-.zip-label {
-  font-size: 0.8em;
-  opacity: 0.7;
-  font-weight: 500;
-}
+.zip-label { font-size: 0.8em; opacity: 0.7; font-weight: 500; }
 
-/* ════════════════════ HERO GROUND STRIP (animated chicks) ════════════════════ */
+/* ════════════════════ HERO GROUND STRIP ════════════════════
+   A mixed parade of chicks and bunnies trails along the bottom of the hero.
+   Each critter is positioned absolutely and slid horizontally with `stroll`,
+   while its sprite frames cycle independently (chicks: continuous walk;
+   bunnies: hop-cycle with vertical arc).                                  */
 
 .ground-strip {
   position: absolute;
   bottom: 0;
   left: 0; right: 0;
-  height: 80px;
+  height: 90px;
   pointer-events: none;
   z-index: 1;
 }
@@ -169,12 +185,20 @@ a:hover { color: var(--accent); }
     rgba(120, 80, 30, 0.15) 30%, rgba(120, 80, 30, 0.15) 70%, transparent 100%);
 }
 
-.chick.walking {
+.critter.walking,
+.critter.hopping {
   position: absolute;
   bottom: 4px;
   left: var(--start);
   animation:
-    walk 0.7s steps(4) infinite,
+    sprite-walk 0.7s steps(4) infinite,
+    stroll var(--duration) ease-in-out var(--delay) infinite alternate;
+}
+
+.critter.hopping {
+  animation:
+    sprite-walk 1.1s steps(4) infinite,
+    hop-arc 1.1s ease-in-out infinite,
     stroll var(--duration) ease-in-out var(--delay) infinite alternate;
 }
 
@@ -183,9 +207,9 @@ a:hover { color: var(--accent); }
   to   { transform: translateX( 30vw); }
 }
 
-/* ════════════════════ CHICK SPRITES ════════════════════ */
+/* ════════════════════ CRITTER SPRITES (chick + bunny share layout) ════════════════════ */
 
-.chick {
+.critter {
   display: inline-block;
   width: 64px;
   height: 64px;
@@ -193,22 +217,46 @@ a:hover { color: var(--accent); }
   background-repeat: no-repeat;
   image-rendering: auto;
 }
+.critter.pixelated { image-rendering: pixelated; image-rendering: crisp-edges; }
 
-.chick.pixelated { image-rendering: pixelated; image-rendering: crisp-edges; }
+.critter.chick.anime       { background-image: url("sprites/chicken_anime.png"); }
+.critter.chick.realistic   { background-image: url("sprites/chicken_realistic.png"); }
+.critter.chick.memoji      { background-image: url("sprites/chicken_memoji.png"); }
+.critter.chick.lego        { background-image: url("sprites/chicken_lego.png"); }
+.critter.chick.embroidered { background-image: url("sprites/chicken_embroidered.png"); }
+.critter.chick.oil         { background-image: url("sprites/chicken_oil.png"); }
+.critter.chick.psx         { background-image: url("sprites/chicken_psx.png"); image-rendering: pixelated; }
 
-.chick.anime       { background-image: url("sprites/chicken_anime.png"); }
-.chick.realistic   { background-image: url("sprites/chicken_realistic.png"); }
-.chick.memoji      { background-image: url("sprites/chicken_memoji.png"); }
-.chick.lego        { background-image: url("sprites/chicken_lego.png"); }
-.chick.embroidered { background-image: url("sprites/chicken_embroidered.png"); }
-.chick.oil         { background-image: url("sprites/chicken_oil.png"); }
-.chick.psx         { background-image: url("sprites/chicken_psx.png"); }
+.critter.bunny.anime       { background-image: url("sprites/bunny_anime.png"); }
+.critter.bunny.realistic   { background-image: url("sprites/bunny_realistic.png"); }
+.critter.bunny.memoji      { background-image: url("sprites/bunny_memoji.png"); }
+.critter.bunny.lego        { background-image: url("sprites/bunny_lego.png"); }
+.critter.bunny.embroidered { background-image: url("sprites/bunny_embroidered.png"); }
+.critter.bunny.oil         { background-image: url("sprites/bunny_oil.png"); }
+.critter.bunny.psx         { background-image: url("sprites/bunny_psx.png"); image-rendering: pixelated; }
 
-.chick.walk-loop { animation: walk 0.7s steps(4) infinite; }
+/* In-card "walk in place" loop for chicks, "hop in place" loop for bunnies. */
+.critter.chick.walk-loop { animation: sprite-walk 0.7s steps(4) infinite; }
+.critter.bunny.hop-loop {
+  animation:
+    sprite-walk 1.05s steps(4) infinite,
+    hop-arc 1.05s ease-in-out infinite;
+}
 
-@keyframes walk {
+@keyframes sprite-walk {
   from { background-position: 0 0; }
   to   { background-position: -256px 0; }
+}
+
+/* Parabolic vertical arc — peaks mid-cycle so it lines up with the airborne
+   frame index. Slight crouch (positive y) right before takeoff sells the
+   loaded-spring posture. */
+@keyframes hop-arc {
+  0%   { transform: translateY(0); }
+  18%  { transform: translateY(2px); }
+  50%  { transform: translateY(-12px); }
+  82%  { transform: translateY(0); }
+  100% { transform: translateY(0); }
 }
 
 /* ════════════════════ SECTIONS ════════════════════ */
@@ -219,28 +267,47 @@ a:hover { color: var(--accent); }
   padding: 5rem 1.5rem;
 }
 
-.section h2 {
+.section-header {
   text-align: center;
+  max-width: 720px;
+  margin: 0 auto 3rem;
+}
+
+.section-eyebrow {
+  display: inline-block;
+  padding: 0.32rem 0.85rem;
+  background: var(--bg-alt);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-soft);
+  margin-bottom: 1rem;
+}
+
+.section h2 {
   font-size: clamp(1.8rem, 4vw, 2.6rem);
   font-weight: 800;
   letter-spacing: -0.01em;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.6rem;
+  text-align: center;
 }
 
 .section-sub {
-  text-align: center;
   color: var(--text-soft);
-  margin-bottom: 3rem;
+  font-size: 0.98rem;
 }
 
-/* ════════════════════ STYLES GRID ════════════════════ */
+/* ════════════════════ CHICK + BUNNY GRID ════════════════════ */
 
-.styles-section { max-width: 1280px; }
+.styles-section,
+.bunnies-section { max-width: 1280px; }
 
 .styles-grid {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
 
 .style-card {
@@ -249,15 +316,16 @@ a:hover { color: var(--accent); }
   border-radius: var(--radius);
   padding: 1.1rem 0.65rem 0.9rem;
   text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
 .style-card:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
 }
 
-.chick-stage {
-  height: 78px;
+.critter-stage {
+  height: 80px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -277,24 +345,170 @@ a:hover { color: var(--accent); }
   line-height: 1.35;
 }
 
-/* Wrap onto fewer rows on narrower viewports. */
+/* The bunnies-section sits on a soft tinted strip so the two species feel
+   like separate chapters even as they share the same card layout.        */
+.bunnies-section {
+  background: var(--bg-soft);
+  max-width: none;
+}
+.bunnies-section .section-header,
+.bunnies-section .styles-grid {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media (max-width: 1024px) { .styles-grid { grid-template-columns: repeat(4, 1fr); } }
 @media (max-width: 720px)  { .styles-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 480px)  { .styles-grid { grid-template-columns: repeat(2, 1fr); } }
 
+/* ════════════════════ SNAKES GRID ════════════════════ */
+
+.snakes-section {
+  background:
+    radial-gradient(ellipse 60% 80% at 80% 0%, rgba(180, 230, 200, 0.30) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 60% at 20% 100%, rgba(255, 225, 200, 0.30) 0%, transparent 65%),
+    var(--bg);
+  max-width: none;
+}
+.snakes-section .section-header,
+.snakes-section .snakes-grid,
+.snakes-section .snakes-note {
+  max-width: var(--max-w);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.snakes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.snake-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.5rem 0.9rem 1rem;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.snake-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+}
+
+.snake-svg {
+  width: 100%;
+  height: 80px;
+  display: block;
+  margin-bottom: 0.4rem;
+  overflow: visible;
+}
+
+/* Default snake silhouette — uniform stroke with rounded caps. Per-style
+   blocks below override --base / --secondary and the overlay nodes' visibility
+   to express the pattern (dorsal stripe, bands, blotches, checker). The base
+   path is always visible; specific overlay nodes appear only when the parent
+   card opts in via class. */
+.snake-svg .snake-body {
+  fill: none;
+  stroke-width: 16;
+  stroke-linecap: round;
+  stroke: var(--snake-base, #555);
+}
+
+.snake-svg .snake-stripe {
+  fill: none;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke: var(--snake-secondary, #fff);
+  display: none;
+}
+
+.snake-svg .snake-bands {
+  fill: none;
+  stroke-width: 16;
+  stroke-linecap: butt;
+  stroke: var(--snake-secondary, #fff);
+  stroke-dasharray: 14 14;
+  display: none;
+}
+
+.snake-svg .snake-blotches ellipse,
+.snake-svg .snake-checkers rect {
+  fill: var(--snake-secondary, #444);
+  display: none;
+}
+
+.snake-svg .snake-head {
+  fill: var(--snake-base, #555);
+  stroke: rgba(0, 0, 0, 0.20);
+  stroke-width: 0.8;
+}
+
+.snake-svg .snake-eye { fill: #1A1714; }
+
+/* Pattern toggles — show the right overlay for each species. */
+.snake-card.emerald .snake-stripe,
+.snake-card.garter  .snake-stripe { display: block; }
+
+.snake-card.coral .snake-bands,
+.snake-card.milk  .snake-bands { display: block; }
+
+.snake-card.albino     .snake-blotches ellipse,
+.snake-card.ball       .snake-blotches ellipse,
+.snake-card.diamondback .snake-checkers rect { display: block; }
+
+/* Per-species colour vars. */
+.snake-card.emerald     { --snake-base: #2E8C4D; --snake-secondary: #ECF1C7; }
+.snake-card.coral       { --snake-base: #DA3330; --snake-secondary: #FBD84C; }
+.snake-card.diamondback { --snake-base: #A88E66; --snake-secondary: #4D3823; }
+.snake-card.albino      { --snake-base: #F8F0D5; --snake-secondary: #F7A674; }
+.snake-card.garter      { --snake-base: #2E4D33; --snake-secondary: #F0DC4C; }
+.snake-card.milk        { --snake-base: #DA3330; --snake-secondary: #1A1714; }
+.snake-card.ball        { --snake-base: #C7A05B; --snake-secondary: #33241A; }
+.snake-card.racer       { --snake-base: #1B1B1F; --snake-secondary: #8C8C90; }
+
+/* Light "shine" along the dorsal axis on every card. */
+.snake-card .snake-svg::after {
+  content: "";
+}
+
+.snake-card h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  letter-spacing: -0.01em;
+}
+
+.snake-card p {
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  line-height: 1.35;
+}
+
+.snakes-note {
+  text-align: center;
+  margin-top: 1.8rem;
+  color: var(--text-soft);
+  font-size: 0.92rem;
+}
+
+/* Wrapping behaviour for narrower screens. */
+@media (max-width: 1024px) { .snakes-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 720px)  { .snakes-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px)  { .snakes-grid { grid-template-columns: 1fr; } }
+
 /* ════════════════════ FEATURES GRID ════════════════════ */
 
-.features-section { background: var(--bg-alt); max-width: none; }
-.features-section .section { padding-top: 0; padding-bottom: 0; }
-
-.features-section > h2,
-.features-section > .features-grid { max-width: var(--max-w); margin-left: auto; margin-right: auto; }
+.features-section { background: var(--bg-alt); }
 
 .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
-  padding: 0 1.5rem;
 }
 
 .feature {
@@ -302,6 +516,11 @@ a:hover { color: var(--accent); }
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 1.75rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.feature:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .feature-icon {
@@ -323,23 +542,28 @@ a:hover { color: var(--accent); }
 
 /* ════════════════════ DOWNLOAD CARD ════════════════════ */
 
+.download-section { padding-top: 4rem; }
+
 .download-card {
   display: flex;
   align-items: center;
   gap: 1.25rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--bg-card) 0%, #FFF8E8 100%);
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius-lg);
   padding: 1.5rem;
   box-shadow: var(--shadow-md);
   flex-wrap: wrap;
   justify-content: center;
+  margin: 1.2rem auto 0;
+  max-width: 720px;
 }
 
 .download-icon {
   width: 80px; height: 80px;
   border-radius: 18px;
   flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
 }
 
 .download-info { flex: 1; min-width: 180px; }
@@ -347,7 +571,7 @@ a:hover { color: var(--accent); }
 .download-meta { font-size: 0.88rem; color: var(--text-soft); }
 
 .install-instructions {
-  margin: 2rem auto 0;
+  margin: 1.2rem auto 0;
   max-width: 720px;
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -373,7 +597,8 @@ a:hover { color: var(--accent); }
 
 .alt-install {
   text-align: center;
-  margin-top: 1.5rem;
+  margin: 1.2rem auto 0;
+  max-width: 720px;
   font-size: 0.9rem;
   color: var(--text-soft);
 }
@@ -394,8 +619,13 @@ a:hover { color: var(--accent); }
   color: var(--text-faint);
   font-size: 0.86rem;
   line-height: 1.8;
+  background: var(--bg-soft);
 }
-.site-footer a { color: var(--text-soft); text-decoration: underline; text-decoration-color: var(--border); }
+.site-footer a {
+  color: var(--text-soft);
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+}
 .footer-credits { margin-top: 0.4rem; }
 
 /* ════════════════════ DARK MODE ════════════════════ */
@@ -404,24 +634,28 @@ a:hover { color: var(--accent); }
   :root {
     --bg:           #1A1714;
     --bg-alt:       #221E1A;
+    --bg-soft:      #1F1B17;
     --bg-card:      #2A2521;
     --text:         #F5EFE8;
     --text-soft:    #B8AFA5;
     --text-faint:   #8A8077;
     --border:       rgba(255, 220, 160, 0.08);
+    --border-strong:rgba(255, 220, 160, 0.16);
     --shadow-sm:    0 2px 8px rgba(0, 0, 0, 0.30);
     --shadow-md:    0 8px 24px rgba(0, 0, 0, 0.40);
     --shadow-lg:    0 20px 48px rgba(0, 0, 0, 0.50);
   }
   .btn-primary { background: var(--primary); color: #1A1714; }
   .btn-primary:hover { color: #1A1714; }
+  .download-card { background: linear-gradient(180deg, var(--bg-card) 0%, #2F2925 100%); }
+  .snake-svg .snake-eye { fill: #FFF6E5; }
 }
 
 /* ════════════════════ MOBILE ════════════════════ */
 
 @media (max-width: 640px) {
   .hero { padding: 3rem 1rem 6rem; }
-  .ground-strip { height: 70px; }
-  .chick.walking { transform: scale(0.8); }
+  .ground-strip { height: 76px; }
+  .critter.walking, .critter.hopping { transform: scale(0.8); }
   .download-card { text-align: center; }
 }

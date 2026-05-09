@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  Empty spritesheet template for the bunny.
+  Source dimensions: 256 × 64 px = 4 horizontal frames of 64 × 64.
+  Drawn here at ×4 zoom (1024 × 256) so the cells are big enough to design in
+  while keeping the canvas at the same overall size as chick_template.svg.
+  Light grid every 1 source pixel, bold borders around every frame cell.
+  Pure white background — drop your final frames straight into the cells, then
+  export the assembled spritesheet at the native 256×64 with a transparent
+  background.
+
+  Frame poses (hop animation cycle, all facing right):
+    F0  idle / sitting   — base pose, ears up, paws together
+    F1  crouch / pre-hop — body lowered, hind legs gathered
+    F2  airborne         — body stretched, hind legs extended back
+    F3  landing          — front paws down first, body compressing
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 400" width="1100" height="400">
+  <defs>
+    <!-- 1-source-pixel grid (every 4 disp px at the ×4 zoom level) -->
+    <pattern id="pxgrid" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
+      <path d="M 4 0 L 0 0 L 0 4" fill="none" stroke="#EEEEEE" stroke-width="0.5"/>
+    </pattern>
+    <!-- 8-source-pixel major grid -->
+    <pattern id="pxgrid_major" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 L 0 32" fill="none" stroke="#D8D8D8" stroke-width="0.6"/>
+    </pattern>
+  </defs>
+
+  <rect width="1100" height="400" fill="#FFFFFF"/>
+
+  <!-- ========== TITLE ========== -->
+  <text x="550" y="38" font-family="-apple-system, system-ui, sans-serif"
+        font-size="22" font-weight="700" text-anchor="middle" fill="#1F1F1F">
+    Bunny Spritesheet Template
+  </text>
+  <text x="550" y="62" font-family="-apple-system, system-ui, sans-serif"
+        font-size="13" text-anchor="middle" fill="#666">
+    Source 256 × 64 px · 4 horizontal frames · 64 × 64 per frame · hop animation cycle
+  </text>
+
+  <!-- ========== SPRITE CANVAS (×4 zoom → 1024 × 256) ========== -->
+  <g transform="translate(38, 100)">
+    <!-- White cells with light pixel grid -->
+    <rect width="1024" height="256" fill="#FFFFFF"/>
+    <rect width="1024" height="256" fill="url(#pxgrid)"/>
+    <rect width="1024" height="256" fill="url(#pxgrid_major)"/>
+
+    <!-- Bold cell borders (every 256 disp = 64 src) -->
+    <g stroke="#1F1F1F" stroke-width="2" fill="none">
+      <rect x="0"   y="0" width="256" height="256"/>
+      <rect x="256" y="0" width="256" height="256"/>
+      <rect x="512" y="0" width="256" height="256"/>
+      <rect x="768" y="0" width="256" height="256"/>
+    </g>
+
+    <!-- Subtle centre crosshair in each cell (helps centre-align frames) -->
+    <g stroke="#D8D8D8" stroke-width="1" stroke-dasharray="3,3">
+      <line x1="128" y1="0"   x2="128" y2="256"/>
+      <line x1="384" y1="0"   x2="384" y2="256"/>
+      <line x1="640" y1="0"   x2="640" y2="256"/>
+      <line x1="896" y1="0"   x2="896" y2="256"/>
+      <line x1="0"   y1="128" x2="1024" y2="128"/>
+    </g>
+
+    <!-- Ground line (helps align all 4 frames so the bunny doesn't drift vertically) -->
+    <g stroke="#FFB347" stroke-width="1.4" stroke-dasharray="6,4" opacity="0.7">
+      <line x1="0" y1="216" x2="1024" y2="216"/>
+    </g>
+    <text x="1028" y="220" font-family="monospace" font-size="11" fill="#FFB347">ground line</text>
+
+    <!-- Source-pixel coordinate ticks -->
+    <g font-family="monospace" font-size="11" fill="#999">
+      <text x="0"    y="-8">0</text>
+      <text x="256"  y="-8" text-anchor="middle">64</text>
+      <text x="512"  y="-8" text-anchor="middle">128</text>
+      <text x="768"  y="-8" text-anchor="middle">192</text>
+      <text x="1024" y="-8" text-anchor="end">256</text>
+      <text x="-8"   y="6"   text-anchor="end">0</text>
+      <text x="-8"   y="262" text-anchor="end">64</text>
+    </g>
+
+    <!-- Frame numbers + pose labels -->
+    <g font-family="-apple-system, system-ui, sans-serif" fill="#BBBBBB">
+      <text x="8"   y="20" font-size="13" font-weight="600">F0</text>
+      <text x="8"   y="246" font-size="11" fill="#999">idle / sitting</text>
+
+      <text x="264" y="20" font-size="13" font-weight="600">F1</text>
+      <text x="264" y="246" font-size="11" fill="#999">crouch / pre-hop</text>
+
+      <text x="520" y="20" font-size="13" font-weight="600">F2</text>
+      <text x="520" y="246" font-size="11" fill="#999">airborne</text>
+
+      <text x="776" y="20" font-size="13" font-weight="600">F3</text>
+      <text x="776" y="246" font-size="11" fill="#999">landing</text>
+    </g>
+  </g>
+
+  <!-- ========== FOOTER NOTE ========== -->
+  <text x="550" y="386" font-family="-apple-system, system-ui, sans-serif"
+        font-size="12" text-anchor="middle" fill="#888">
+    All frames must face the same direction (right). Final export: 256 × 64 px PNG with transparent background.
+  </text>
+</svg>
