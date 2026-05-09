@@ -1,0 +1,87 @@
+name: Release
+
+# Triggered automatically whenever you push a tag like `v1.0`, `v1.1.2`, etc.
+# Builds Chick.app on a fresh macOS runner, zips it with `ditto` (so macOS
+# metadata survives the round-trip), and uploads the zip as a GitHub Release
+# asset matching the tag.
+#
+# Manual usage:
+#   git tag v1.0 -m "first public release"
+#   git push origin v1.0
+#
+# That single push kicks off the workflow and produces a release at
+# https://github.com/sagistiki/chick/releases/tag/v1.0 with Chick.zip attached.
+
+on:
+  push:
+    tags:
+      - 'v*'
+  # Allow re-running for an existing tag from the Actions tab.
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to (re)release, e.g. v1.0'
+        required: true
+        default: 'v1.0'
+
+permissions:
+  contents: write    # needed by softprops/action-gh-release to publish
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show toolchain versions
+        run: |
+          sw_vers
+          swift --version
+          xcrun --show-sdk-version
+
+      - name: Build Chick.app
+        run: bash build.sh
+
+      - name: Verify bundle structure
+        run: |
+          test -f Chick.app/Contents/MacOS/Chick
+          test -f Chick.app/Contents/Info.plist
+          test -f Chick.app/Contents/Resources/AppIcon.icns
+          test -d Chick.app/Contents/Resources/sounds
+          echo "✅ bundle ok"
+          du -sh Chick.app
+
+      - name: Zip for release
+        run: |
+          mkdir -p dist
+          /usr/bin/ditto -c -k --sequesterRsrc --keepParent Chick.app dist/Chick.zip
+          ls -lh dist/
+
+      - name: Resolve tag name
+        id: tag
+        run: |
+          if [ -n "${{ github.event.inputs.tag }}" ]; then
+            echo "name=${{ github.event.inputs.tag }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "name=${GITHUB_REF##*/}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.name }}
+          name: Chick ${{ steps.tag.outputs.name }}
+          files: dist/Chick.zip
+          generate_release_notes: true
+          body: |
+            ## Install
+
+            1. Download **`Chick.zip`** below.
+            2. Unzip and drag **`Chick.app`** into `~/Applications`.
+            3. macOS will block the unsigned app on first launch — **right-click → Open**, then click *Open* in the dialog.
+
+            A 🐤 icon shows up in your menu bar with all controls (spawn, despawn, change style, show coop, quit).
+
+            ## What's new
