@@ -14,13 +14,11 @@ A tiny baby-chick critter that lives on your Mac desktop.
 - 🖥️ **Multi-monitor aware** — chicks correctly walk across screen boundaries, never wander into the void
 - 🌒 **Below or above app windows** — toggle from the menu
 
-
-
 ## Install
 
 Download `Chick.zip` from [the latest release](../../releases/latest) (or [the website](https://sagistiki.github.io/chick)), unzip, drag `Chick.app` into `~/Applications`.
 
-The app is unsigned (just an ad-hoc signature — no $99/yr Apple Developer ID), so macOS quarantines it on download and reports it as "damaged". Strip the quarantine flag once:
+The app is unsigned, so macOS quarantines it on download and reports it as "damaged". Strip the quarantine flag once:
 
 ```bash
 xattr -cr ~/Applications/Chick.app
@@ -63,7 +61,7 @@ chick/
 
 ## How the sounds work
 
-Chick chirps are produced via additive synthesis grounded in published bioacoustic research — two "voices" mixed together to mimic the avian *syrinx* (which has two independent sources). Each voice has its own F0 sweep, harmonic stack, jitter, and shimmer. Sharp 2–5 ms attacks, dynamic harmonic decay during release. Frequency targets cover the standard neonatal *Gallus gallus* call classes (pleasure / distress / warble / short peep, ~2.5–5 kHz).
+Chick chirps are produced via additive synthesis grounded in published bioacoustic research — two "voices" mixed together to mimic the avian _syrinx_ (which has two independent sources). Each voice has its own F0 sweep, harmonic stack, jitter, and shimmer. Sharp 2–5 ms attacks, dynamic harmonic decay during release. Frequency targets cover the standard neonatal _Gallus gallus_ call classes (pleasure / distress / warble / short peep, ~2.5–5 kHz).
 
 See the docstring in `generate_sounds.py` for citations.
 
